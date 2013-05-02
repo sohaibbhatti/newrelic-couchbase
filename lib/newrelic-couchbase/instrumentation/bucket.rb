@@ -14,7 +14,9 @@
     :flush,
     :append,
     :prepend,
-    :touch
+    :touch,
+    :stats,
+    :run
   ].each do |instruction|
     add_method_tracer instruction, "Couchbase/Bucket/#{instruction.to_s}"
   end
