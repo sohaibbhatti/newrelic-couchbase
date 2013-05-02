@@ -1,6 +1,6 @@
 # Newrelic::Couchbase
 
-TODO: Write a gem description
+CouchBase instrumentation for NewRelic
 
 ## Installation
 
