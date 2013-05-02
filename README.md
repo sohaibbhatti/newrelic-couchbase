@@ -4,6 +4,10 @@ CouchBase instrumentation for NewRelic
 
 ## Installation
 
+Make sure you have installed the [Couchbase Ruby
+Client](https://github.com/couchbase/couchbase-ruby-client) and [NewRelic
+RPM](https://github.com/newrelic/rpm)
+
 Add this line to your application's Gemfile:
 
     gem 'newrelic-couchbase'
@@ -12,13 +16,18 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install newrelic-couchbase
-
 ## Usage
 
-TODO: Write usage instructions here
+Core methods of Couchbase will begin to traced by NewRelic. To disable
+Couchbase instrumentation either the DISABLE_NEW_RELIC_COUCHBASE flag
+can be set to true
+```ruby
+  ENV['DISABLE_NEW_RELIC_COUCHBASE'] = true
+```
+OR, the following statement can be appended to the newrelic.yml file
+```yaml
+  disable_couchbase: true
+```
 
 ## Contributing
 

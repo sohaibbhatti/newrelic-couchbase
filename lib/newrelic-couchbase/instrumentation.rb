@@ -6,7 +6,7 @@ DependencyDetection.defer do
   depends_on do
     defined?(::Couchbase) &&
       !::NewRelic::Control.instance['disable_couchbase'] &&
-      !ENV['DISABLE_NEW_RELIC_couchbase']
+      !ENV['DISABLE_NEW_RELIC_COUCHBASE']
   end
 
   executes do
@@ -14,20 +14,6 @@ DependencyDetection.defer do
   end
 
   executes do
-    ::Couchbase.module_eval do
-      class << self
-        include NewRelic::Agent::MethodTracer
-        add_method_tracer :connect, 'Couchbase/Bucket/connect'
-        add_method_tracer :new,     'Couchbase/Bucket/connect'
-        add_method_tracer :bucket,  'Couchbase/Bucket/bucket'
-      end
-    end
-
-    ::Couchbase::Bucket.class_eval do
-      include NewRelic::Agent::MethodTracer
-      add_method_tracer :set,                'Couchbase/Bucket/set'
-      add_method_tracer :get,                'Couchbase/Bucket/get'
-      add_method_tracer :incr,               'Couchbase/Bucket/incr'
-    end
+    Dir.glob("#{File.dirname(__FILE__)}/instrumentation/*.rb") {|file| require file }
   end
 end
