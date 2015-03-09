@@ -5,7 +5,6 @@
   [
     :get,
     :set,
-    :set_if_nil,
     :add,
     :replace,
     :delete,
@@ -20,6 +19,9 @@
   ].each do |instruction|
     add_method_tracer instruction, "Couchbase/Bucket/#{instruction.to_s}"
   end
+
+  add_method_tracer :incr, "Couchbase/Bucket/increment"
+  add_method_tracer :decr, "Couchbase/Bucket/decrement"
 
   add_method_tracer :cas,                   'Couchbase/Bucket/compare_and_swap'
   add_method_tracer :compare_and_swap,      'Couchbase/Bucket/compare_and_swap'
